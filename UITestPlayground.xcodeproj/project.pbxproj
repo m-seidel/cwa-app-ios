@@ -3,18 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		35DD907425F8ACEC0015FF95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD907325F8ACEC0015FF95 /* AppDelegate.swift */; };
 		35DD907625F8ACEC0015FF95 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD907525F8ACEC0015FF95 /* SceneDelegate.swift */; };
-		35DD907825F8ACEC0015FF95 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD907725F8ACEC0015FF95 /* ViewController.swift */; };
 		35DD907B25F8ACEC0015FF95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35DD907925F8ACEC0015FF95 /* Main.storyboard */; };
 		35DD907D25F8ACED0015FF95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35DD907C25F8ACED0015FF95 /* Assets.xcassets */; };
 		35DD908025F8ACED0015FF95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35DD907E25F8ACED0015FF95 /* LaunchScreen.storyboard */; };
 		35DD908B25F8ACED0015FF95 /* UITestPlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD908A25F8ACED0015FF95 /* UITestPlaygroundTests.swift */; };
 		35DD909625F8ACED0015FF95 /* UITestPlaygroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD909525F8ACED0015FF95 /* UITestPlaygroundUITests.swift */; };
+		35DD90AD25F8AD2A0015FF95 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD90AC25F8AD2A0015FF95 /* TableViewController.swift */; };
+		35DD90B325F8ADAC0015FF95 /* LoremSwiftum in Frameworks */ = {isa = PBXBuildFile; productRef = 35DD90B225F8ADAC0015FF95 /* LoremSwiftum */; };
+		35DD90B825F8ADD60015FF95 /* DummyContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DD90B725F8ADD60015FF95 /* DummyContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,6 @@
 		35DD907025F8ACEC0015FF95 /* UITestPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITestPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35DD907325F8ACEC0015FF95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35DD907525F8ACEC0015FF95 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		35DD907725F8ACEC0015FF95 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		35DD907A25F8ACEC0015FF95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		35DD907C25F8ACED0015FF95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35DD907F25F8ACED0015FF95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		35DD909125F8ACED0015FF95 /* UITestPlaygroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITestPlaygroundUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35DD909525F8ACED0015FF95 /* UITestPlaygroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestPlaygroundUITests.swift; sourceTree = "<group>"; };
 		35DD909725F8ACED0015FF95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35DD90AC25F8AD2A0015FF95 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		35DD90B725F8ADD60015FF95 /* DummyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyContent.swift; sourceTree = "<group>"; };
+		35DD90C825F8B8DA0015FF95 /* UITestPlayground.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UITestPlayground.xctestplan; path = UITestPlayground/TestPlans/UITestPlayground.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35DD90B325F8ADAC0015FF95 /* LoremSwiftum in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,7 @@
 		35DD906725F8ACEC0015FF95 = {
 			isa = PBXGroup;
 			children = (
+				35DD90C825F8B8DA0015FF95 /* UITestPlayground.xctestplan */,
 				35DD907225F8ACEC0015FF95 /* UITestPlayground */,
 				35DD908925F8ACED0015FF95 /* UITestPlaygroundTests */,
 				35DD909425F8ACED0015FF95 /* UITestPlaygroundUITests */,
@@ -101,11 +107,12 @@
 			children = (
 				35DD907325F8ACEC0015FF95 /* AppDelegate.swift */,
 				35DD907525F8ACEC0015FF95 /* SceneDelegate.swift */,
-				35DD907725F8ACEC0015FF95 /* ViewController.swift */,
 				35DD907925F8ACEC0015FF95 /* Main.storyboard */,
 				35DD907C25F8ACED0015FF95 /* Assets.xcassets */,
 				35DD907E25F8ACED0015FF95 /* LaunchScreen.storyboard */,
 				35DD908125F8ACED0015FF95 /* Info.plist */,
+				35DD90AC25F8AD2A0015FF95 /* TableViewController.swift */,
+				35DD90B725F8ADD60015FF95 /* DummyContent.swift */,
 			);
 			path = UITestPlayground;
 			sourceTree = "<group>";
@@ -144,6 +151,9 @@
 			dependencies = (
 			);
 			name = UITestPlayground;
+			packageProductDependencies = (
+				35DD90B225F8ADAC0015FF95 /* LoremSwiftum */,
+			);
 			productName = UITestPlayground;
 			productReference = 35DD907025F8ACEC0015FF95 /* UITestPlayground.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +225,9 @@
 				Base,
 			);
 			mainGroup = 35DD906725F8ACEC0015FF95;
+			packageReferences = (
+				35DD90B125F8ADAC0015FF95 /* XCRemoteSwiftPackageReference "LoremSwiftum" */,
+			);
 			productRefGroup = 35DD907125F8ACEC0015FF95 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,8 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35DD907825F8ACEC0015FF95 /* ViewController.swift in Sources */,
+				35DD90B825F8ADD60015FF95 /* DummyContent.swift in Sources */,
 				35DD907425F8ACEC0015FF95 /* AppDelegate.swift in Sources */,
+				35DD90AD25F8AD2A0015FF95 /* TableViewController.swift in Sources */,
 				35DD907625F8ACEC0015FF95 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +453,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 899TBUG98P;
 				INFOPLIST_FILE = UITestPlayground/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,6 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 899TBUG98P;
 				INFOPLIST_FILE = UITestPlayground/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,6 +543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.staticline.UITestPlaygroundUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UITestPlayground;
@@ -547,6 +564,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = de.staticline.UITestPlaygroundUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = UITestPlayground;
@@ -593,6 +611,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35DD90B125F8ADAC0015FF95 /* XCRemoteSwiftPackageReference "LoremSwiftum" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lukaskubanek/LoremSwiftum.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35DD90B225F8ADAC0015FF95 /* LoremSwiftum */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35DD90B125F8ADAC0015FF95 /* XCRemoteSwiftPackageReference "LoremSwiftum" */;
+			productName = LoremSwiftum;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35DD906825F8ACEC0015FF95 /* Project object */;
 }
