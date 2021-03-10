@@ -12,7 +12,7 @@ class UITestPlaygroundUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
-    func testExample() throws {
+    func testCellExistence() throws {
         let app = XCUIApplication()
         app.launch()
 
@@ -21,7 +21,7 @@ class UITestPlaygroundUITests: XCTestCase {
         cell1.tap()
 
 
-        let cell2 = app.cells["0-0"]
+        let cell2 = app.cells["0-2"]
         XCTAssertTrue(cell2.waitForExistence(timeout: 10))
         cell2.tap()
     }

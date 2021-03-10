@@ -31,14 +31,6 @@
         "identifier" : "35DD909025F8ACED0015FF95",
         "name" : "UITestPlaygroundUITests"
       }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:UITestPlayground.xcodeproj",
-        "identifier" : "35DD90D825F8C23E0015FF95",
-        "name" : "UITests"
-      }
     }
   ],
   "version" : 1
