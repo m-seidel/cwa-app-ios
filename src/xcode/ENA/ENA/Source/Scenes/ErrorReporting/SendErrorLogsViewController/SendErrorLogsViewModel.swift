@@ -50,7 +50,7 @@ class SendErrorLogsViewModel {
 				.body(
 					text: AppStrings.ErrorReport.sendReportsDetails,
 					style: DynamicCell.TextCellStyle.label,
-					accessibilityIdentifier: "TODO ACCESSABILITY IDENTIFIER",
+					accessibilityIdentifier: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton,
 					accessibilityTraits: UIAccessibilityTraits.link,
 					action: .execute(block: { [weak self] _, _ in
 						self?.didPressDetailsButton()

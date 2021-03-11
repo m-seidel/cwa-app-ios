@@ -163,6 +163,77 @@ class ENAUITests_02_AppInformation: XCTestCase {
 		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.stopAndDeleteButton].exists)
 
 	}
+
+	// AppInformation > Error Reports > Send > Send Reports Details Button
+	func test_0028_AppInformationFlow_ErrorReportsSend() throws {
+		app.launch()
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.Home.rightBarButtonDescription].waitForExistence(timeout: .short))
+		navigateToErrorReporting()
+			
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.topBody].waitForExistence(timeout: .short))
+		app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].tap()
+
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].waitForExistence(timeout: .medium))
+		app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].tap()
+
+		guard let element = UITestHelper.scrollTo(identifier: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton, element: app, app: app)
+		else {
+			XCTFail("Did not found element ID: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton")
+			return
+		}
+
+		XCTAssertTrue(element.waitForExistence(timeout: .short))
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.saveLocallyButton].exists)
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.stopAndDeleteButton].exists)
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].exists)
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.General.primaryFooterButton].exists)
+		
+		element.tap()
+		
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.detailedInformationTitle].exists)
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.detailedInfo_Subheadline].exists)
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.detailedInfo_Content2].exists)
+	}
+	
+	// AppInformation > Error Reports > Send > Send
+	func test_0029_AppInformationFlow_ErrorReportsSend() throws {
+		app.launch()
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.Home.rightBarButtonDescription].waitForExistence(timeout: .short))
+		navigateToErrorReporting()
+		
+		// Screen 1
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.topBody].waitForExistence(timeout: .short))
+		app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].tap()
+
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].waitForExistence(timeout: .medium))
+		app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].tap()
+		
+		guard let element = UITestHelper.scrollTo(identifier: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton, element: app, app: app)
+		else {
+			XCTFail("Did not found element ID: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton")
+			return
+		}
+
+		XCTAssertTrue(element.waitForExistence(timeout: .short))
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.saveLocallyButton].exists)
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.stopAndDeleteButton].exists)
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].exists)
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.General.primaryFooterButton].exists)
+		
+		app.buttons[AccessibilityIdentifiers.General.primaryFooterButton].tap()
+		
+		AccessibilityLabels.printAccIdentifiers(app.cells)
+//		Acc.Id 2: AppStrings.ErrorReport.privacyNavigation
+//		Acc.Id 3: AppStrings.ErrorReport.historyNavigation
+//		Acc.Id 4: AppStrings.ErrorReport.privacyInformation
+		
+		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.topBody].waitForExistence(timeout: .short))
+
+		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].exists)
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].exists)
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.saveLocallyButton].exists)
+		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.stopAndDeleteButton].exists)
+	}
 	
 	private func navigateToErrorReporting() {
 
