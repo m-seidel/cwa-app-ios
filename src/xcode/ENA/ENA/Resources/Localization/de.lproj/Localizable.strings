@@ -1214,21 +1214,13 @@ sein.";
 "App_Information_Terms_Title" = "Nutzungsbedingungen";
 
 /* App Information - Error Report */
-"ErrorReport_Title" = "Fehlerberichte";
-
-"ErrorReport_Description1" = "Wenn Sie den technischen Support kontaktieren, werden Sie unter Umständen gebeten, eine Fehleranalyse zu erstellen. Wenn Sie die Fehleranalyse starten, werden die Schritte aufgezeichnet, die Sie in der App ausführen. Weitere Informationen finden Sie in den FAQs:";
-
-"ErrorReport_FAQ" = "FAQ zur Fehleranalyse";
-
-"ErrorReport_Description2" = "Das Fehleranalyse-Protokoll kann Gesundheitsdaten (z.B. Testergebnis oder Risikostatus) enthalten. Bitte versenden Sie das Protokoll daher ausschließlich über die App und nicht per E-Mail.";
-
 "ErrorReport_PrivacyInformation" = "Weitere Hinweise finden Sie in der Datenschutzerklärung";
 
 "ErrorReport_ActiveStatus_Title" = "Fehleranalyse läuft";
 
 "ErrorReport_InactiveStatus_Title" = "Inaktiv";
 
-"ErrorReport_Progress_Description" = "Derzeitige Größe %@ B (unkomprimiert)";
+"ErrorReport_Progress_Description" = "Derzeitige Größe %@ (unkomprimiert)";
 
 "ErrorReport_StartButtonTitle" = "Starten";
 
@@ -1240,7 +1232,7 @@ sein.";
 
 "ErrorReport_SendReports_Title" = "Fehlerbericht senden";
 
-"ErrorReport_SendReports_Paragraph" = "Bevor Sie den aufgezeichneten Fehlerbericht an den technischen Support des RKI übersenden können, ist Ihr Einverständnis erforderlich.\n\nNach der Übersendung erhalten Sie eine Fehlerbericht-ID. Diese können Sie angeben, um dem technischen Support z.B. weitere Informationen zukommen zu lassen und dabei eine Zuordnung zu Ihrem Fehlerbericht zu ermöglichen. Wenn Sie die Fehlerbericht-ID nicht mitteilen, ist dem RKI eine Zuordnung zu Ihrer Person nicht möglich.";
+"ErrorReport_SendReports_Paragraph" = "Bevor Sie den aufgezeichneten Fehlerbericht an den technischen Support des RKI übersenden können, ist Ihr Einverständnis erforderlich.\n\nNach der Übersendung erhalten Sie eine Fehlerbericht-ID. Diese können Sie angeben, um dem technischen Support z. B. weitere Informationen zukommen zu lassen und dabei eine Zuordnung zu Ihrem Fehlerbericht zu ermöglichen. Wenn Sie die Fehlerbericht-ID nicht mitteilen, ist dem RKI eine Zuordnung zu Ihrer Person nicht möglich.";
 
 "ErrorReport_SendReports_Details" = "Ausführliche Informationen zu dieser Datenverarbeitung und den Datenschutzrisiken in den USA und anderen Drittländern";
 
@@ -1934,13 +1926,11 @@ Die Angaben werden statistisch ausgewertet, sie werden nicht zu einem Profil ges
 
 "ErrorReport_FAQ" = "FAQ zu den Fehlerberichten";
 
-"ErrorReport_Description2" = "Bevor Sie den aufgezeichneten Fehlerbericht an den technischen Support des RKI übersenden können, ist Ihr Einverständnis erforderlich.\n\nNach der Übersendung erhalten Sie eine Fehlerbericht-ID. Diese können Sie angeben, um dem technischen Support z. B. weitere Informationen zukommen zu lassen und dabei eine Zuordnung zu Ihrem Fehlerbericht zu ermöglichen. Wenn Sie die Fehlerbericht-ID nicht mitteilen, ist dem RKI eine Zuordnung zu Ihrer Person nicht möglich.";
-
 "ErrorReport_DetailedInformation_Title" = "Ausführliche Informationen zur Übersendung der Fehlerberichte";
 
 "errorReport_DetailedInformation_Headline" = "Prüfung der Echtheit und Drittlandsübermittlung";
 
-"errorReport_DetailedInformation_Content1" = "Um die Echtheit Ihrer App zu bestätigen, erzeugt Ihr Smartphone eine eindeutige Kennung, die Informationen über die Version Ihres Smartphones und der App enthält. Das ist erforderlich, um sicherzustellen, dass nur Nutzer Daten auf diesem Weg an den technischen Support übersenden, die tatsächlich die Corona-Warn-App nutzen und nicht manipulierte Fehlerberichte bereitstellen. Die Kennung wird dafür einmalig an Apple übermittelt. Dabei kann es auch zu einer Datenübermittlung in die USA oder andere Drittländer kommen. Dort besteht möglicherweise kein dem europäischen Recht entsprechendes Datenschutzniveau und Ihre europäischen Datenschutzrechte können eventuell nicht durchgesetzt werden. Insbesondere besteht die Möglichkeit, dass Sicherheitsbehörden im Drittland, auch ohne einen konkreten Verdacht, auf die übermittelten Daten bei Apple zugreifen und diese auswerten, beispielsweise indem sie Daten mit anderen Informationen verknüpfen. Dies betrifft nur die an Apple übermittelte Kennung. Die Angaben aus Ihrem Fehlerbericht erhält Apple nicht. Möglicherweise kann Apple jedoch anhand der Kennung auf Ihre Identität schließen und nachvollziehen, dass die Echtheitsprüfung Ihres Smartphones stattgefunden hat.\n\nWenn Sie mit der Drittlandsübermittlung nicht einverstanden sind, tippen Sie bitte nicht „Einverstanden und Fehlerbericht senden“ an. Sie können die App weiterhin nutzen, eine Übersendung des Fehlerberichtes über die App ist dann jedoch nicht möglich.";
+"errorReport_DetailedInformation_Content1" = "Um die Echtheit Ihrer App zu bestätigen, erzeugt Ihr Smartphone eine eindeutige Kennung, die Informationen über die Version Ihres Smartphones und der App enthält. Das ist erforderlich, um sicherzustellen, dass nur Nutzer Daten auf diesem Weg an den technischen Support übersenden, die tatsächlich die Corona-Warn-App nutzen und nicht manipulierte Fehlerberichte bereitstellen. Die Kennung wird dafür einmalig an Apple übermittelt. Dabei kann es auch zu einer Datenübermittlung in die USA oder andere Drittländer kommen. Dort besteht möglicherweise kein dem europäischen Recht entsprechendes Datenschutzniveau und Ihre europäischen Datenschutzrechte können eventuell nicht durchgesetzt werden. Insbesondere besteht die Möglichkeit, dass Sicherheitsbehörden im Drittland, auch ohne einen konkreten Verdacht, auf die übermittelten Daten bei Apple zugreifen und diese auswerten, beispielsweise indem sie Daten mit anderen Informationen verknüpfen. Dies betrifft nur die an Apple übermittelte Kennung. Die Angaben aus Ihrem Fehlerbericht erhält Apple nicht. Möglicherweise kann Apple jedoch anhand der Kennung auf Ihre Identität schließen und nachvollziehen, dass die Echtheitsprüfung Ihres Smartphones stattgefunden hat.\n\nWenn Sie mit der Drittlandsübermittlung nicht einverstanden sind, tippen Sie bitte nicht „Einverstanden und senden“ an. Sie können die App weiterhin nutzen, eine Übersendung des Fehlerberichtes über die App ist dann jedoch nicht möglich.";
 
 "ErrorReport_DetailedInformation_Subheadline" = "Zur Auswertung der Fehlerberichte durch das RKI";
 
