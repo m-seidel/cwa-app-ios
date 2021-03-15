@@ -164,7 +164,7 @@ class ENAUITests_02_AppInformation: XCTestCase {
 
 	}
 
-	// AppInformation > Error Reports > Send > Send Reports Details Button
+	// AppInformation > Error Reports > Start > Send > Send Reports Details Button
 	func test_0028_AppInformationFlow_ErrorReportsSend() throws {
 		app.launch()
 		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.Home.rightBarButtonDescription].waitForExistence(timeout: .short))
@@ -182,7 +182,7 @@ class ENAUITests_02_AppInformation: XCTestCase {
 			return
 		}
 
-		XCTAssertTrue(element.waitForExistence(timeout: .short))
+		XCTAssertTrue(element.exists)
 		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.saveLocallyButton].exists)
 		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.stopAndDeleteButton].exists)
 		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].exists)
@@ -195,7 +195,7 @@ class ENAUITests_02_AppInformation: XCTestCase {
 		XCTAssertTrue(app.staticTexts[AccessibilityIdentifiers.ErrorReport.detailedInfo_Content2].exists)
 	}
 	
-	// AppInformation > Error Reports > Send > Send
+	// AppInformation > Error Reports > Start > Send
 	func test_0029_AppInformationFlow_ErrorReportsSend() throws {
 		app.launch()
 		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.Home.rightBarButtonDescription].waitForExistence(timeout: .short))
@@ -208,7 +208,7 @@ class ENAUITests_02_AppInformation: XCTestCase {
 		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].waitForExistence(timeout: .medium))
 		app.buttons[AccessibilityIdentifiers.ErrorReport.sendReportButton].tap()
 		
-		guard let element = UITestHelper.scrollTo(identifier: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton, element: app, app: app)
+		guard let element = UITestHelper.scrollTo(identifier: AccessibilityIdentifiers.General.primaryFooterButton, element: app, app: app)
 		else {
 			XCTFail("Did not found element ID: AccessibilityIdentifiers.ErrorReport.sendReportsDetailsButton")
 			return
@@ -220,9 +220,9 @@ class ENAUITests_02_AppInformation: XCTestCase {
 		XCTAssertFalse(app.buttons[AccessibilityIdentifiers.ErrorReport.startButton].exists)
 		XCTAssertTrue(app.buttons[AccessibilityIdentifiers.General.primaryFooterButton].exists)
 		
-		app.buttons[AccessibilityIdentifiers.General.primaryFooterButton].tap()
+		element.tap()
 		
-		AccessibilityLabels.printAccIdentifiers(app.cells)
+//		AccessibilityLabels.printAccIdentifiers(app.cells)
 //		Acc.Id 2: AppStrings.ErrorReport.privacyNavigation
 //		Acc.Id 3: AppStrings.ErrorReport.historyNavigation
 //		Acc.Id 4: AppStrings.ErrorReport.privacyInformation
