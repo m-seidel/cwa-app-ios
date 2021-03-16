@@ -1,0 +1,25 @@
+{
+	"ServerEnvironments":[
+		{
+			"name": "Default",
+			"distributionURL": "https://svc90.main.px.t-online.de",
+			"submissionURL": "https://submission.coronawarn.app",
+			"verificationURL": "https://verification.coronawarn.app",
+			"dataDonationURL": "https://data.coronawarn.app"
+		},
+		{
+			"name": "INT",
+			"distributionURL": "https://svc90int.main.px.t-online.de",
+			"submissionURL": "https://submission-dfe4f5c711db.coronawarn.app",
+			"verificationURL": "https://verification-ae90d11f.coronawarn.app",
+			"dataDonationURL": "https://data-500xfzhb.coronawarn.app"
+		},
+		{
+			"name": "WRU-XD",
+			"distributionURL": "https://svc90wru-xd.main.px.t-online.de",
+			"submissionURL": "https://submission-xd-cff4f7147260.coronawarn.app",
+			"verificationURL": "https://verification-xd-2554e68b.coronawarn.app",
+			"dataDonationURL": "https://data-h6kxf9oe.coronawarn.app"
+		}
+	]
+}
