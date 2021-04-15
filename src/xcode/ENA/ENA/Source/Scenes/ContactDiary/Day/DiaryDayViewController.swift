@@ -58,6 +58,11 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 				}
 			}
 			.store(in: &subscriptions)
+		
+		let rightBarButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEdit))
+		rightBarButton.accessibilityLabel = AppStrings.ContactDiary.Overview.menuButtonTitle
+		rightBarButton.tintColor = .enaColor(for: .tint)
+		self.navigationItem.setRightBarButton(rightBarButton, animated: false)
 	}
 
 	// MARK: - Protocol UITableViewDataSource
@@ -214,6 +219,11 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		default:
 			viewModel.selectedEntryType = .location
 		}
+	}
+	
+	@objc
+	private func onEdit() {
+		tableView.isEditing = true
 	}
 
 }
