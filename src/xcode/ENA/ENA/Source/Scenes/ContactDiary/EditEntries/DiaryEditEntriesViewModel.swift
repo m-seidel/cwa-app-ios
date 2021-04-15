@@ -77,6 +77,15 @@ class DiaryEditEntriesViewModel {
 	func removeEntry(at indexPath: IndexPath) {
 		remove(entry: entries[indexPath.row])
 	}
+	
+	func remove(entry: DiaryEntry) {
+		switch entry {
+		case .location(let location):
+			store.removeLocation(id: location.id)
+		case .contactPerson(let contactPerson):
+			store.removeContactPerson(id: contactPerson.id)
+		}
+	}
 
 	func removeAll() {
 		switch entryType {
@@ -89,18 +98,10 @@ class DiaryEditEntriesViewModel {
 
 	// MARK: - Private
 
-	private let entryType: DiaryEntryType
+	let entryType: DiaryEntryType
 	private let store: DiaryStoringProviding
 
 	private var subscriptions: [AnyCancellable] = []
 
-	private func remove(entry: DiaryEntry) {
-		switch entry {
-		case .location(let location):
-			store.removeLocation(id: location.id)
-		case .contactPerson(let contactPerson):
-			store.removeContactPerson(id: contactPerson.id)
-		}
-	}
-
+	
 }

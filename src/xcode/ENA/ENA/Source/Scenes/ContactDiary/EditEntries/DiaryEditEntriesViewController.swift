@@ -13,10 +13,14 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 		entryType: DiaryEntryType,
 		store: DiaryStoringProviding,
 		onCellSelection: @escaping (DiaryEntry) -> Void,
+		onDeleteEntry: @escaping (DiaryEntry, () -> Void) -> Void,
+		onDeleteAll: @escaping (DiaryEntryType, () -> Void) -> Void,
 		onDismiss: @escaping () -> Void
 	) {
 		self.viewModel = DiaryEditEntriesViewModel(entryType: entryType, store: store)
 		self.onCellSelection = onCellSelection
+		self.onDeleteEntry = onDeleteEntry
+		self.onDeleteAll = onDeleteAll
 		self.onDismiss = onDismiss
 
 		super.init(nibName: nil, bundle: nil)
@@ -94,30 +98,21 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		guard editingStyle == .delete else { return }
 
-		showAlert(
-			title: viewModel.deleteOneAlertTitle,
-			message: viewModel.deleteOneAlertMessage,
-			cancelButtonTitle: viewModel.deleteOneAlertCancelButtonTitle,
-			confirmButtonTitle: viewModel.deleteOneAlertConfirmButtonTitle,
-			confirmAction: { [weak self] in
-				guard let self = self else { return }
-
-				self.shouldReload = false
-				self.viewModel.removeEntry(at: indexPath)
-				tableView.performBatchUpdates({
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}, completion: { _ in
-					self.shouldReload = true
-				})
-			}
-		)
-
+		self.shouldReload = false
+		self.viewModel.removeEntry(at: indexPath)
+		tableView.performBatchUpdates({
+			tableView.deleteRows(at: [indexPath], with: .automatic)
+		}, completion: { _ in
+			self.shouldReload = true
+		})
 	}
 
 	// MARK: - Private
 
 	private let viewModel: DiaryEditEntriesViewModel
 	private let onCellSelection: (DiaryEntry) -> Void
+	private let onDeleteEntry: (DiaryEntry, () -> Void) -> Void
+	private let onDeleteAll: (DiaryEntryType, () -> Void) -> Void
 	private let onDismiss: () -> Void
 
 	private var subscriptions = [AnyCancellable]()
@@ -146,61 +141,19 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 	}
 
 	@IBAction private func didTapDeleteAllButton(_ sender: ENAButton) {
-		showAlert(
-			title: viewModel.deleteAllAlertTitle,
-			message: viewModel.deleteAllAlertMessage,
-			cancelButtonTitle: viewModel.deleteAllAlertCancelButtonTitle,
-			confirmButtonTitle: viewModel.deleteAllAlertConfirmButtonTitle,
-			confirmAction: { [weak self] in
-				guard let self = self else { return }
+		self.onDeleteAll(viewModel.entryType, completion:{_ in
+			let numberOfRows = self.viewModel.entries.count
 
-				let numberOfRows = self.viewModel.entries.count
-
-				self.shouldReload = false
-				self.viewModel.removeAll()
-				self.tableView.performBatchUpdates({
-					self.tableView.deleteRows(
-						at: (0..<numberOfRows).map { IndexPath(row: $0, section: 0) },
-						with: .automatic
-					)
-				}, completion: { _ in
-					self.shouldReload = true
-				})
-			}
-		)
-	}
-
-	private func showAlert(
-		title: String,
-		message: String,
-		cancelButtonTitle: String,
-		confirmButtonTitle: String,
-		confirmAction: @escaping () -> Void
-	) {
-		let alert = UIAlertController(
-			title: title,
-			message: message,
-			preferredStyle: .alert
-		)
-
-		alert.addAction(
-			UIAlertAction(
-				title: cancelButtonTitle,
-				style: .cancel
-			)
-		)
-
-		alert.addAction(
-			UIAlertAction(
-				title: confirmButtonTitle,
-				style: .destructive,
-				handler: { _ in
-					confirmAction()
-				}
-			)
-		)
-
-		present(alert, animated: true, completion: nil)
+			self.shouldReload = false
+			self.tableView.performBatchUpdates({
+				self.tableView.deleteRows(
+					at: (0..<numberOfRows).map { IndexPath(row: $0, section: 0) },
+					with: .automatic
+				)
+			}, completion: { _ in
+				self.shouldReload = true
+			})
+		})
 	}
 
 }

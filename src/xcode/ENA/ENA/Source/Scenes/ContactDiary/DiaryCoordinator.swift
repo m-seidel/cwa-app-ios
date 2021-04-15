@@ -217,6 +217,9 @@ class DiaryCoordinator {
 					mode: .edit(entry),
 					from: nil
 				)
+			},
+			onDeleteEntry: { ([weak self] entry, completion)  in
+				self?.deletePersonOrPlace(entryType: .edit(entry))
 			}
 		)
 		
@@ -250,6 +253,41 @@ class DiaryCoordinator {
 		presentingViewController.present(navigationController, animated: true)
 	}
 
+	private func deletePersonOrPlace(entryType: DiaryEntryType, entry: DiaryEntry) {
+		let viewModel = DiaryEditEntriesViewModel(
+			entryType: entryType,
+			store: diaryStore
+		)
+		
+		showAlert(
+			title: viewModel.deleteOneAlertTitle,
+			message: viewModel.deleteOneAlertMessage,
+			cancelButtonTitle: viewModel.deleteOneAlertCancelButtonTitle,
+			confirmButtonTitle: viewModel.deleteOneAlertConfirmButtonTitle,
+			confirmAction: { [] in
+				viewModel.remove(entry: entry)
+			}
+		)
+	}
+	
+	private func deleteAll(entryType: DiaryEntryType, completion: (() -> Void)?) {
+		let viewModel = DiaryEditEntriesViewModel(
+			entryType: entryType,
+			store: diaryStore
+		)
+		
+		showAlert(
+			title: viewModel.deleteAllAlertTitle,
+			message: viewModel.deleteAllAlertMessage,
+			cancelButtonTitle: viewModel.deleteAllAlertCancelButtonTitle,
+			confirmButtonTitle: viewModel.deleteAllAlertConfirmButtonTitle,
+			confirmAction: { [] in
+				viewModel.removeAll()
+				completion?()
+			}
+		)
+	}
+	
 	private func showDiaryDayNotesInfoScreen() {
 		var navigationController: UINavigationController!
 
@@ -300,4 +338,36 @@ class DiaryCoordinator {
 		self.viewController.present(viewController, animated: true, completion: nil)
 	}
 	
+	private func showAlert(
+		title: String,
+		message: String,
+		cancelButtonTitle: String,
+		confirmButtonTitle: String,
+		confirmAction: @escaping () -> Void
+	) {
+		let alert = UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .alert
+		)
+
+		alert.addAction(
+			UIAlertAction(
+				title: cancelButtonTitle,
+				style: .cancel
+			)
+		)
+
+		alert.addAction(
+			UIAlertAction(
+				title: confirmButtonTitle,
+				style: .destructive,
+				handler: { _ in
+					confirmAction()
+				}
+			)
+		)
+
+		self.viewController.present(alert, animated: true, completion: nil)
+	}
 }

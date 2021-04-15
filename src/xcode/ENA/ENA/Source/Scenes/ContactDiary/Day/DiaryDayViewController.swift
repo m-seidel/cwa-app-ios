@@ -12,11 +12,13 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	init(
 		viewModel: DiaryDayViewModel,
 		onInfoButtonTap: @escaping () -> Void,
-		onEditEntry: @escaping (DiaryEntry) -> Void
+		onEditEntry: @escaping (DiaryEntry) -> Void,
+		onDeleteEntry: @escaping (DiaryEntry) -> Void
 	) {
 		self.viewModel = viewModel
 		self.onInfoButtonTap = onInfoButtonTap
 		self.onEditEntry = onEditEntry
+		self.onDeleteEntry = onDeleteEntry
 
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -127,6 +129,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	private let viewModel: DiaryDayViewModel
 	private let onInfoButtonTap: () -> Void
 	private let onEditEntry: (DiaryEntry) -> Void
+	private let onDeleteEntry: (DiaryEntry) -> Void
 
 	private var subscriptions = [AnyCancellable]()
 
