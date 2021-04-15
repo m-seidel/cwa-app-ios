@@ -11,10 +11,12 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 
 	init(
 		viewModel: DiaryDayViewModel,
-		onInfoButtonTap: @escaping () -> Void
+		onInfoButtonTap: @escaping () -> Void,
+		onEditEntry: @escaping (DiaryEntry) -> Void
 	) {
 		self.viewModel = viewModel
 		self.onInfoButtonTap = onInfoButtonTap
+		self.onEditEntry = onEditEntry
 
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -98,11 +100,33 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 			fatalError("Invalid section")
 		}
 	}
+	
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		
+		let delete = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+			tableView.isEditing = false
+		}
+
+		let add = UIContextualAction(style: .normal, title: "Edit") { _, _, _  in
+			let cellModel = self.viewModel.entryCellModel(at: indexPath)
+			self.onEditEntry(cellModel.entry)
+			tableView.isEditing = false
+		}
+		
+
+		let config = UISwipeActionsConfiguration(actions: [delete, add])
+		return config
+	}
 
 	// MARK: - Private
 
 	private let viewModel: DiaryDayViewModel
 	private let onInfoButtonTap: () -> Void
+	private let onEditEntry: (DiaryEntry) -> Void
 
 	private var subscriptions = [AnyCancellable]()
 
@@ -223,7 +247,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	
 	@objc
 	private func onEdit() {
-		tableView.isEditing = true
+		tableView.isEditing = !tableView.isEditing
 	}
 
 }

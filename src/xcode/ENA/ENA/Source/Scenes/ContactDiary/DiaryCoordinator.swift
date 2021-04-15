@@ -211,6 +211,12 @@ class DiaryCoordinator {
 			),
 			onInfoButtonTap: { [weak self] in
 				self?.showDiaryDayNotesInfoScreen()
+			},
+			onEditEntry: { [weak self] entry in
+				self?.showAddAndEditEntryScreen(
+					mode: .edit(entry),
+					from: nil
+				)
 			}
 		)
 		

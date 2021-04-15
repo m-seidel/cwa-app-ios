@@ -181,7 +181,7 @@ struct DiaryDayEntryCellModel {
 
 	// MARK: - Private
 
-	private let entry: DiaryEntry
+	public let entry: DiaryEntry
 	private let store: DiaryStoringProviding
 	private let dateString: String
 
