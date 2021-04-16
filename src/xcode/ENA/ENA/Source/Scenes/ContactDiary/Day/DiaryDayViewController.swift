@@ -13,7 +13,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		viewModel: DiaryDayViewModel,
 		onInfoButtonTap: @escaping () -> Void,
 		onEditEntry: @escaping (DiaryEntry) -> Void,
-		onDeleteEntry: @escaping (DiaryEntry) -> Void
+		onDeleteEntry: @escaping (DiaryEntry, (() -> Void)?) -> Void
 	) {
 		self.viewModel = viewModel
 		self.onInfoButtonTap = onInfoButtonTap
@@ -110,6 +110,8 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		
 		let delete = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+			let cellModel = self.viewModel.entryCellModel(at: indexPath)
+			self.onDeleteEntry(cellModel.entry, nil)
 			tableView.isEditing = false
 		}
 
@@ -129,7 +131,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	private let viewModel: DiaryDayViewModel
 	private let onInfoButtonTap: () -> Void
 	private let onEditEntry: (DiaryEntry) -> Void
-	private let onDeleteEntry: (DiaryEntry) -> Void
+	private let onDeleteEntry: (DiaryEntry, (() -> Void)?) -> Void
 
 	private var subscriptions = [AnyCancellable]()
 

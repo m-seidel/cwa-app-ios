@@ -13,8 +13,8 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 		entryType: DiaryEntryType,
 		store: DiaryStoringProviding,
 		onCellSelection: @escaping (DiaryEntry) -> Void,
-		onDeleteEntry: @escaping (DiaryEntry, () -> Void) -> Void,
-		onDeleteAll: @escaping (DiaryEntryType, () -> Void) -> Void,
+		onDeleteEntry: @escaping (DiaryEntry, UIViewController, (() -> Void)?) -> Void,
+		onDeleteAll: @escaping (DiaryEntryType, UIViewController, (() -> Void)?) -> Void,
 		onDismiss: @escaping () -> Void
 	) {
 		self.viewModel = DiaryEditEntriesViewModel(entryType: entryType, store: store)
@@ -98,12 +98,15 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		guard editingStyle == .delete else { return }
 
-		self.shouldReload = false
-		self.viewModel.removeEntry(at: indexPath)
-		tableView.performBatchUpdates({
-			tableView.deleteRows(at: [indexPath], with: .automatic)
-		}, completion: { _ in
-			self.shouldReload = true
+		let entry = self.viewModel.entries[indexPath.row]
+		self.onDeleteEntry(entry, self, {
+			self.shouldReload = false
+			tableView.performBatchUpdates({
+				tableView.deleteRows(at: [indexPath], with: .automatic)
+			}, completion: { _ in
+				self.shouldReload = true
+			})
+
 		})
 	}
 
@@ -111,8 +114,8 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 
 	private let viewModel: DiaryEditEntriesViewModel
 	private let onCellSelection: (DiaryEntry) -> Void
-	private let onDeleteEntry: (DiaryEntry, () -> Void) -> Void
-	private let onDeleteAll: (DiaryEntryType, () -> Void) -> Void
+	private let onDeleteEntry: (DiaryEntry, UIViewController, (() -> Void)?) -> Void
+	private let onDeleteAll: (DiaryEntryType, UIViewController, (() -> Void)?) -> Void
 	private let onDismiss: () -> Void
 
 	private var subscriptions = [AnyCancellable]()
@@ -141,7 +144,7 @@ class DiaryEditEntriesViewController: UIViewController, UITableViewDataSource, U
 	}
 
 	@IBAction private func didTapDeleteAllButton(_ sender: ENAButton) {
-		self.onDeleteAll(viewModel.entryType, completion:{_ in
+		self.onDeleteAll(viewModel.entryType, self, {
 			let numberOfRows = self.viewModel.entries.count
 
 			self.shouldReload = false

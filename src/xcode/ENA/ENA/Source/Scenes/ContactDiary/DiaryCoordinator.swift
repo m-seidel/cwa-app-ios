@@ -218,8 +218,8 @@ class DiaryCoordinator {
 					from: nil
 				)
 			},
-			onDeleteEntry: { ([weak self] entry, completion)  in
-				self?.deletePersonOrPlace(entryType: .edit(entry))
+			onDeleteEntry: { [weak self] entry, completion in
+				self?.deleteSingleEntry(entry: entry, from: nil, completion: completion)
 			}
 		)
 		
@@ -253,9 +253,9 @@ class DiaryCoordinator {
 		presentingViewController.present(navigationController, animated: true)
 	}
 
-	private func deletePersonOrPlace(entryType: DiaryEntryType, entry: DiaryEntry) {
+	private func deleteSingleEntry(entry: DiaryEntry, from viewController: UIViewController?, completion: (() -> Void)?) {
 		let viewModel = DiaryEditEntriesViewModel(
-			entryType: entryType,
+			entryType: entry.type,
 			store: diaryStore
 		)
 		
@@ -264,13 +264,15 @@ class DiaryCoordinator {
 			message: viewModel.deleteOneAlertMessage,
 			cancelButtonTitle: viewModel.deleteOneAlertCancelButtonTitle,
 			confirmButtonTitle: viewModel.deleteOneAlertConfirmButtonTitle,
+			fromViewController: viewController,
 			confirmAction: { [] in
 				viewModel.remove(entry: entry)
+				completion?()
 			}
 		)
 	}
 	
-	private func deleteAll(entryType: DiaryEntryType, completion: (() -> Void)?) {
+	private func deleteAll(entryType: DiaryEntryType, from viewController: UIViewController?, completion: (() -> Void)?) {
 		let viewModel = DiaryEditEntriesViewModel(
 			entryType: entryType,
 			store: diaryStore
@@ -281,6 +283,7 @@ class DiaryCoordinator {
 			message: viewModel.deleteAllAlertMessage,
 			cancelButtonTitle: viewModel.deleteAllAlertCancelButtonTitle,
 			confirmButtonTitle: viewModel.deleteAllAlertConfirmButtonTitle,
+			fromViewController: viewController,
 			confirmAction: { [] in
 				viewModel.removeAll()
 				completion?()
@@ -315,10 +318,17 @@ class DiaryCoordinator {
 					from: navigationController
 				)
 			},
+			onDeleteEntry: { [weak self] entry, fromViewController, completion in
+				self?.deleteSingleEntry(entry: entry, from: fromViewController, completion: completion)
+			},
+			onDeleteAll: { [weak self] entryType, fromViewController, completion in
+				self?.deleteAll(entryType: entryType, from: fromViewController, completion: completion)
+			},
 			onDismiss: { [weak self] in
 				self?.viewController.dismiss(animated: true)
 			}
 		)
+
 		navigationController = UINavigationController(rootViewController: viewController)
 		self.viewController.present(navigationController, animated: true)
 	}
@@ -343,8 +353,11 @@ class DiaryCoordinator {
 		message: String,
 		cancelButtonTitle: String,
 		confirmButtonTitle: String,
+		fromViewController: UIViewController?,
 		confirmAction: @escaping () -> Void
 	) {
+		let presentingViewController = fromViewController ?? viewController
+		
 		let alert = UIAlertController(
 			title: title,
 			message: message,
@@ -368,6 +381,6 @@ class DiaryCoordinator {
 			)
 		)
 
-		self.viewController.present(alert, animated: true, completion: nil)
+		presentingViewController.present(alert, animated: true, completion: nil)
 	}
 }
