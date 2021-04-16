@@ -104,7 +104,11 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-		return true
+		let cell = tableView.cellForRow(at: indexPath)
+		if let c = cell {
+			return !c.isKind(of: DiaryDayAddTableViewCell.self)
+		}
+		return false
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -125,6 +129,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		let config = UISwipeActionsConfiguration(actions: [delete, add])
 		return config
 	}
+	
 
 	// MARK: - Private
 
