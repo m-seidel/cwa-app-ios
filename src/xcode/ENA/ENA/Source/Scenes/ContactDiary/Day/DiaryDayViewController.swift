@@ -130,7 +130,14 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		return config
 	}
 	
-
+	func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+		return false
+	}
+	
+	func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+		return .none
+	}
+	
 	// MARK: - Private
 
 	private let viewModel: DiaryDayViewModel
