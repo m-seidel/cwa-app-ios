@@ -41,8 +41,10 @@ struct DiaryDayEntryCellModel {
 	let image: UIImage?
 	let text: String
 	let font: UIFont
-
+	
+	let entry: DiaryEntry
 	let entryType: DiaryEntryType
+
 	let parametersHidden: Bool
 
 	let accessibilityTraits: UIAccessibilityTraits
@@ -181,7 +183,6 @@ struct DiaryDayEntryCellModel {
 
 	// MARK: - Private
 
-	public let entry: DiaryEntry
 	private let store: DiaryStoringProviding
 	private let dateString: String
 

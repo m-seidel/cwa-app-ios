@@ -63,9 +63,6 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 			}
 			.store(in: &subscriptions)
 		
-		let rightBarButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEdit))
-		rightBarButton.accessibilityLabel = AppStrings.ContactDiary.Overview.menuButtonTitle
-		rightBarButton.tintColor = .enaColor(for: .tint)
 		self.navigationItem.setRightBarButton(rightBarButton, animated: false)
 	}
 
@@ -108,7 +105,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		if let c = cell {
 			return !c.isKind(of: DiaryDayAddTableViewCell.self)
 		}
-		return false
+		return true
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -144,6 +141,7 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	private let onInfoButtonTap: () -> Void
 	private let onEditEntry: (DiaryEntry) -> Void
 	private let onDeleteEntry: (DiaryEntry, (() -> Void)?) -> Void
+	private var editMode: Bool = false
 
 	private var subscriptions = [AnyCancellable]()
 
@@ -155,6 +153,13 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 		return viewModel.day
 	}
 
+	private lazy var rightBarButton: UIBarButtonItem = {
+		let button = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEdit))
+		button.accessibilityLabel = AppStrings.ContactDiary.Overview.menuButtonTitle
+		button.tintColor = .enaColor(for: .tint)
+		return button
+	}()
+	
 	private func setupSegmentedControl() {
 		segmentedControl.setTitle(AppStrings.ContactDiary.Day.contactPersonsSegment, forSegmentAt: 0)
 		segmentedControl.setTitle(AppStrings.ContactDiary.Day.locationsSegment, forSegmentAt: 1)
@@ -228,6 +233,12 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 			cellModel: cellModel,
 			onInfoButtonTap: { [weak self] in
 				self?.onInfoButtonTap()
+			},
+			onEditEntry: { [weak self] entry in
+				self?.onEditEntry(entry)
+			},
+			onDeleteEntry: { [weak self] entry in
+				self?.onDeleteEntry(entry, nil)
 			}
 		)
 
@@ -264,7 +275,13 @@ class DiaryDayViewController: UIViewController, UITableViewDataSource, UITableVi
 	
 	@objc
 	private func onEdit() {
-		tableView.isEditing = !tableView.isEditing
+		editMode = !editMode
+		rightBarButton.title = editMode ? "Done" : "Edit"
+		tableView.visibleCells.forEach { cell in
+			if let c = cell as? DiaryDayEntryTableViewCell {
+				c.setEdit(to: editMode)
+			}
+		}
 	}
 
 }

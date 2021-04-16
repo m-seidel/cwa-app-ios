@@ -30,15 +30,29 @@ class DiaryDayEntryTableViewCell: UITableViewCell, UITextFieldDelegate {
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		endEditing(true)
 	}
+	
+	func setEdit(to editing: Bool) {
+		cellInEditMode = editing
+		
+		if editing {
+			checkboxImageView.image = UIImage(named: "Icons_Grey_Entfernen")
+		} else {
+			checkboxImageView.image = cellModel.image
+		}
+	}	
 
 	// MARK: - Internal
 
 	func configure(
 		cellModel: DiaryDayEntryCellModel,
-		onInfoButtonTap: @escaping () -> Void
+		onInfoButtonTap: @escaping () -> Void,
+		onEditEntry: @escaping (DiaryEntry) -> Void,
+		onDeleteEntry: @escaping (DiaryEntry) -> Void
 	) {
 		self.cellModel = cellModel
 		self.onInfoButtonTap = onInfoButtonTap
+		self.onEditEntry = onEditEntry
+		self.onDeleteEntry = onDeleteEntry
 
 		checkboxImageView.image = cellModel.image
 		label.text = cellModel.text
@@ -55,12 +69,22 @@ class DiaryDayEntryTableViewCell: UITableViewCell, UITextFieldDelegate {
 		notesTextField.text = cellModel.circumstances
 
 		accessibilityTraits = cellModel.accessibilityTraits
+		
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(checkboxImageViewClicked))
+
+		// add it to the image view;
+		checkboxImageView.addGestureRecognizer(tapGesture)
+		// make sure imageView can be interacted with by user
+		checkboxImageView.isUserInteractionEnabled = true
 	}
 
 	// MARK: - Private
 
 	private var cellModel: DiaryDayEntryCellModel!
 	private var onInfoButtonTap: (() -> Void)!
+	private var cellInEditMode: Bool = false
+	private var onEditEntry: ((DiaryEntry) -> Void)?
+	private var onDeleteEntry: ((DiaryEntry) -> Void)?
 
 	@IBOutlet private weak var label: ENALabel!
 	@IBOutlet private weak var checkboxImageView: UIImageView!
@@ -194,7 +218,7 @@ class DiaryDayEntryTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		cellModel.updateContactPersonEncounter(circumstances: circumstances)
 	}
-	
+
 	@objc
 	private func updateLocationVisit() {
 		let circumstances = notesTextField.text ?? ""
@@ -208,6 +232,10 @@ class DiaryDayEntryTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 	@objc
 	private func headerTapped() {
+		if cellInEditMode {
+			self.onEditEntry?(cellModel.entry)
+			return
+		}
 		cellModel.toggleSelection()
 	}
 
@@ -229,6 +257,15 @@ class DiaryDayEntryTableViewCell: UITableViewCell, UITextFieldDelegate {
 	@objc
 	private func infoButtonTapped() {
 		onInfoButtonTap()
+	}
+    
+	@objc
+	func checkboxImageViewClicked(_ sender: Any) {
+		if cellInEditMode {
+			self.onDeleteEntry?(cellModel.entry)
+		} else {
+			cellModel.toggleSelection()
+		}
 	}
 
 }
